@@ -1,7 +1,6 @@
 import os
 import logging
 from openai import OpenAI
-from dotenv import load_dotenv
 import streamlit as st
 import time
 import asyncio
@@ -9,10 +8,9 @@ import asyncio
 
 class SurveyBot:
     def __init__(self, objective):
-        load_dotenv()
         self.configure_logging()
-        self.api_key = os.environ.get("OPENAI_API_KEY")
-        self.assistant_id = os.environ.get("ASSISTANT_ID")
+        self.api_key = st.secrets["OPENAI_API_KEY"]
+        self.assistant_id = st.secrets["ASSISTANT_ID"]
         self.client = OpenAI(api_key=self.api_key)
         self.objective = objective
         self.thread_id = None
